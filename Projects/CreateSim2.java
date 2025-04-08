@@ -1,9 +1,10 @@
+
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
 @SuppressWarnings("unused")
-public class CreateSim {
+public class CreateSim2 {
 
     private static final String[] VALID_SEX = {"male", "female"};
     private static final String[] VALID_RACES = {"black", "white", "hispanic", "indian"};
@@ -15,7 +16,7 @@ public class CreateSim {
     private int age;
     private float mass;
 
-    public CreateSim(String name, String race, int age, String sex, String gender, Number mass) {
+    public CreateSim2(String name, String race, int age, String sex, String gender, Number mass) {
         validateInputs(name, race, age, sex, mass);
 
         this.name = name;
@@ -23,10 +24,11 @@ public class CreateSim {
         this.age = age;
         this.sex = sex;
         this.gender = (gender != null) ? validateGender(gender) : sex;
+        this.gender = (gender == null) ? sex: validateGender(gender);
         this.mass = mass.floatValue();
     }
 
-    public CreateSim(String name, String race, int age, String sex, Number mass) {
+    public CreateSim2(String name, String race, int age, String sex, Number mass) {
         this(name, race, age, sex, null, mass);
     }
 
@@ -60,7 +62,7 @@ public class CreateSim {
     }
 
     public static void main(String[] args) {
-        CreateSim sim1 = new CreateSim("jimmy", "black", 23, "male", 60);
+        CreateSim2 sim1 = new CreateSim2("jimmy", "black", 23, "male", 60);
         System.out.println(sim1.getGender());
     }
 }

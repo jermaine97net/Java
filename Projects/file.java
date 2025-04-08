@@ -1,24 +1,56 @@
-import java.util.HashMap;
-import java.util.List;
 import java.util.Arrays;
 import java.util.Map;
+import java.util.HashMap;
+import java.util.List;
 
+// @SuppressWarnings("unused")
 public class file {
-  
-  static List<String> names  = Arrays.asList("Kyle", "Susan", "Mathew");
 
-  static int[] ages = {20, 19, 28};
+    public  String gender = "female";
+    public static String sex = "male";
 
-  static Map<String, Integer> names_ages  = new HashMap<>();
-
-  public static void main (String[] args) {
-    for (int n = 0; n < names.size(); n++) {
-      names_ages.put(names.get(n), ages[n]);
+    public file (String input) {
+        this.gender = input;
     }
 
-    for (Map.Entry<String, Integer> entry: names_ages.entrySet()) {
-      System.out.println("The value for Key " + entry.getKey() + " is " + entry.getValue());
+    public String getGender () {
+        return gender;
     }
-}
 
+    public String getSex () {
+        return sex;
+    }
+
+    // public void changeGender (String newGender) {
+    //     this.gender = newGender;
+    // }
+
+    public static void main (String[] args) {
+
+        List<Object[]> nameAge = Arrays.asList(
+            new Object[]{"Mathew", 35},
+            new Object[]{"Susan", 57},
+            new Object[]{"Peter", 27},
+            new Object[]{"Tandeka",16}
+        );
+        
+        Map<String, Integer> dictionary = new HashMap<>();
+
+        for (Object[] item : nameAge) {
+            String name = (String) item[0];
+            Integer age = (Integer) item[1];
+            dictionary.put(name, age);
+        }
+
+        for (Map.Entry<String, Integer> entry : dictionary.entrySet()) {
+            dictionary.put(entry.getKey(), entry.getValue() * 2);
+        }
+
+        for (Map.Entry<String, Integer> entry : dictionary.entrySet()) {
+            System.out.println("Key is " + entry.getKey() + " Value is " + entry.getValue());
+        }
+
+        file pat = new file("male");
+        System.out.println(pat.gender);
+    }
 }

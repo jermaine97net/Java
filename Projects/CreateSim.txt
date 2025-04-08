@@ -1,0 +1,19 @@
+public class CreateSim {
+
+    private static final String[] validRaces = {
+        "black", "hispanic", "white"
+        "indian", "Asisan", "arabic"
+    };
+
+    private static final String[] validSexes = {
+        "male", "female"
+    };
+
+    private String name;
+    private String race;
+    private String sex;
+    private Number age;
+    private Number mass;
+    private final String gender;
+
+}
