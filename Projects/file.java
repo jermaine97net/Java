@@ -33,6 +33,7 @@ public class file {
             new Object[]{"Peter", 27},
             new Object[]{"Tandeka",16}
         );
+
         
         Map<String, Integer> dictionary = new HashMap<>();
 
@@ -51,6 +52,7 @@ public class file {
         }
 
         file pat = new file("male");
+        pat.gender = "female";
         System.out.println(pat.gender);
     }
 }
