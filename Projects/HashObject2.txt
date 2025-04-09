@@ -1,0 +1,44 @@
+import java.util.HashSet;
+import java.util.Set;
+import java.util.Random;
+
+public class HashObject2 {
+    
+    public static void main(String[] args){
+        
+        // Filtering unique items
+        //================================
+        Set<Integer> intSet = new HashSet<>();
+        int[] intArray = {1, 2, 3, 4, 4, 6};
+
+        for(Integer num : intArray){
+            intSet.add(num);
+        }
+        System.out.println("Unique integers are: " + intSet);
+        //================================
+        
+        // Using it to create an array of random numbers
+        //===============================
+        Random rand = new Random();
+        int sizeArray = 5;
+        int[] randArray = new int[sizeArray];
+        Set<Integer> usedIntegers = new HashSet<>();
+
+        int index = 0;
+        while(index < sizeArray){
+            int randInt = rand.nextInt(100); // Generates random integer between 0 and 99
+            if(!usedIntegers.contains(randInt)) {
+                randArray[index] = randInt;
+                usedIntegers.add(randInt);
+                index++;
+            }
+        }
+
+        // Output the array of random unique integers
+        System.out.print("Random unique integers are: ");
+        for (int num : randArray) {
+            System.out.print(num + " ");
+        }
+        System.out.println();
+    }
+}
