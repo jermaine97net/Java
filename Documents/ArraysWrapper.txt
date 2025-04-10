@@ -1,0 +1,135 @@
+import java.util.*;
+
+/**
+ * A wrapper class for multi-dimensional arrays that provides proper equals() and hashCode()
+ * implementations based on array content rather than reference.
+ * @param <T> The type of the wrapped multi-dimensional array
+ */
+public class ArrayWrapper<T> {
+    private final T array;
+
+    /**
+     * Creates a new ArrayWrapper for the given array.
+     * @param array The array to wrap
+     */
+    public ArrayWrapper(T array) {
+        if (array == null || !array.getClass().isArray()) {
+            throw new IllegalArgumentException("Input must be an array");
+        }
+        this.array = array;
+    }
+
+    /**
+     * Gets the wrapped array.
+     * @return The wrapped array
+     */
+    public T getArray() {
+        return array;
+    }
+
+    /**
+     * Compares this wrapper to another object for equality.
+     * Two ArrayWrappers are equal if their wrapped arrays have the same content.
+     */
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        
+        ArrayWrapper<?> that = (ArrayWrapper<?>) obj;
+        return deepEquals(this.array, that.array);
+    }
+
+    /**
+     * Generates a hash code based on the content of the wrapped array.
+     */
+    @Override
+    public int hashCode() {
+        return deepHashCode(array);
+    }
+    
+    /**
+     * Helper method for deep equality comparison of arrays.
+     */
+    @SuppressWarnings("unchecked")
+    private boolean deepEquals(Object a1, Object a2) {
+        if (a1 instanceof Object[] && a2 instanceof Object[]) {
+            return Arrays.deepEquals((Object[]) a1, (Object[]) a2);
+        } else if (a1 instanceof byte[] && a2 instanceof byte[]) {
+            return Arrays.equals((byte[]) a1, (byte[]) a2);
+        } else if (a1 instanceof short[] && a2 instanceof short[]) {
+            return Arrays.equals((short[]) a1, (short[]) a2);
+        } else if (a1 instanceof int[] && a2 instanceof int[]) {
+            return Arrays.equals((int[]) a1, (int[]) a2);
+        } else if (a1 instanceof long[] && a2 instanceof long[]) {
+            return Arrays.equals((long[]) a1, (long[]) a2);
+        } else if (a1 instanceof char[] && a2 instanceof char[]) {
+            return Arrays.equals((char[]) a1, (char[]) a2);
+        } else if (a1 instanceof float[] && a2 instanceof float[]) {
+            return Arrays.equals((float[]) a1, (float[]) a2);
+        } else if (a1 instanceof double[] && a2 instanceof double[]) {
+            return Arrays.equals((double[]) a1, (double[]) a2);
+        } else if (a1 instanceof boolean[] && a2 instanceof boolean[]) {
+            return Arrays.equals((boolean[]) a1, (boolean[]) a2);
+        }
+        return a1 != null && a1.equals(a2);
+    }
+    
+    /**
+     * Helper method for generating a hash code based on array content.
+     */
+    private int deepHashCode(Object array) {
+        if (array instanceof Object[]) {
+            return Arrays.deepHashCode((Object[]) array);
+        } else if (array instanceof byte[]) {
+            return Arrays.hashCode((byte[]) array);
+        } else if (array instanceof short[]) {
+            return Arrays.hashCode((short[]) array);
+        } else if (array instanceof int[]) {
+            return Arrays.hashCode((int[]) array);
+        } else if (array instanceof long[]) {
+            return Arrays.hashCode((long[]) array);
+        } else if (array instanceof char[]) {
+            return Arrays.hashCode((char[]) array);
+        } else if (array instanceof float[]) {
+            return Arrays.hashCode((float[]) array);
+        } else if (array instanceof double[]) {
+            return Arrays.hashCode((double[]) array);
+        } else if (array instanceof boolean[]) {
+            return Arrays.hashCode((boolean[]) array);
+        }
+        return array != null ? array.hashCode() : 0;
+    }
+    
+    @Override
+    public String toString() {
+        if (array instanceof Object[]) {
+            return Arrays.deepToString((Object[]) array);
+        }
+        // Handle primitive arrays
+        return array.toString();
+    }
+}
+
+// Example usage with your MainRun class
+public class MainRun {
+    public static void main(String[] args) {
+        Object[][] names = {{1}, {"Susan"}};
+        Object[][] names2 = {{1}, {"Susan"}};
+        
+        // Create a set of array wrappers
+        Set<ArrayWrapper<Object[][]>> setArrays = new HashSet<>();
+        setArrays.add(new ArrayWrapper<>(names));
+        setArrays.add(new ArrayWrapper<>(names2));
+        
+        // This will print 1 because the arrays have the same content
+        System.out.println("Set size: " + setArrays.size());
+        
+        // Create an array with different content
+        Object[][] names3 = {{2}, {"John"}};
+        setArrays.add(new ArrayWrapper<>(names3));
+        
+        // This will print 2
+        System.out.println("Set size after adding different array: " + setArrays.size());
+    }
+}
